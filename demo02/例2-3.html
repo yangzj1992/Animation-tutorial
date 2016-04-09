@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<style>
+#block {
+  background-color: red;
+  width: 50px;
+  height: 50px;
+}
+</style>
+<body>
+<div id="block"></div>
+<script>
+block.addEventListener('click', function(){
+  var self = this, startTime = Date.now(),
+      distance = 200, T = 2000;
+  requestAnimationFrame(function step(){
+    var p = Math.min(1.0, (Date.now() - startTime) / T);
+    self.style.transform = 'translateX(' 
+      + (distance * p * (2-p)) +'px)';
+    if(p < 1.0) requestAnimationFrame(step);
+  });
+});
+</script>
+</body>
+</html>
+

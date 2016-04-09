@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<style>
+  #block {
+    background-color: red;
+    width: 50px;
+    height: 50px;
+    position:absolute;
+    top:100px;
+    left:100px;
+  }
+</style>
+<body>
+<div id="block"></div>
+<script>
+  block.addEventListener('click', function(){
+    var self = this, startTime = Date.now();
+    setInterval(function(){
+      var T = 1000;
+      var p = (Date.now() - startTime) / T;
+      self.style.transform = 'rotate(' + (360 * p) +'deg)';
+    });
+  });
+</script>
+</body>
+</html>
+

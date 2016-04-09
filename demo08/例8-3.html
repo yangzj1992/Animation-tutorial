@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<style>
+  #block{
+    position:absolute;
+    left: 50px;
+    top: 200px;
+    width: 20px;
+    height: 20px;
+    background: #0c8;
+    text-align: center;
+    border-radius: 50%;
+  }
+  #block.play {
+    border-radius: 0;
+    transform: scale(2.0);
+    background: #c80;
+    transition: all 2.0s cubic-bezier(0.68, -0.55, 0.265, 1.55) 3s;
+  }
+  #block.play2 {
+    /* transition 覆盖*/
+    background: #c8f;
+    transition: all 2.0s linear 0.5s; 
+  transform: scale(2.0) rotate(360deg);
+  }
+</style>
+<body>
+<div id="block"></div>
+<script>
+  block.addEventListener('click', function(){
+    block.className = 'play play2';
+  });
+</script>
+</body>
+</html>
+

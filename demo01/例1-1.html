@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<style>
+  #block {
+    background-color: red;
+    width: 50px;
+    height: 50px;
+    position:absolute;
+    left:100px;
+    top:100px;
+  }
+</style>
+<body>
+<div id="block">click me</div>
+<script>
+  var deg = 0;
+  block.addEventListener('click', function(){
+    var self = this;
+    setInterval(function(){
+      self.style.transform = 'rotate(' + (deg++) +'deg)';
+    });
+  });
+</script>
+</body>
+</html>
+

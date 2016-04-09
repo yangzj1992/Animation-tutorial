@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<style>
+#block {
+  width:12px;
+  height:12px;
+  background-color:red;
+  border-radius:50%;
+}
+</style>
+<body>
+<div id="block"></div>
+<script>
+block.addEventListener('click', function(){
+  var self = this, startTime = Date.now(),
+      distance = 200, T = 2000;
+  requestAnimationFrame(function step(){
+    var p = Math.min(1.0, (Date.now() - startTime) / T);
+    var tx = distance * p;
+    var ty = tx;
+
+    self.style.transform = 'translate(' 
+      + tx + 'px' + ',' + ty +'px)';
+    if(p < 1.0) requestAnimationFrame(step);
+  });
+});
+</script>
+</body>
+</html>
+

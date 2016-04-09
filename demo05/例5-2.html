@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<style>
+  #block{
+    position:absolute;
+    left: 200px;
+    top: 400px;
+    width: 20px;
+    height: 20px;
+    background: #0c8;
+    border-radius: 50%;
+    transform: translateY(-200px);
+  }
+</style>
+<body>
+<div id="block"></div>
+<script>
+  function Animator(duration, progress, easing){
+    this.duration = duration;
+    this.progress = progress;
+    this.easing = easing || function(p){return p};
+  }
+  
+  Animator.prototype = {
+    start: function(finished){
+      var startTime = Date.now();
+      var duration = this.duration,
+          self = this;
+      
+      requestAnimationFrame(function step(){
+        var p = (Date.now() - startTime) / duration;
+        var next =  true;
+        
+        if(p < 1.0){
+          self.progress(self.easing(p), p);
+        }else{
+          if(typeof finished === 'function'){
+            next = finished() === false;
+          }else{
+            next = finished === false;
+          }
+          
+          if(!next){
+            self.progress(self.easing(1.0), 1.0);
+          }else{
+            startTime += duration;
+            self.progress(self.easing(p), p);
+          }
+        }
+        
+        if(next) requestAnimationFrame(step);
+      });
+    }
+  };
+  
+  function AnimationQueue(animators){
+    this.animators = animators || [];
+  }
+
+  AnimationQueue.prototype = {
+    status: 'ready',
+    append: function(){
+      var args = [].slice.call(arguments);
+      this.animators.push.apply(this.animators, args);
+    },
+    flush: function(){
+      if(this.animators.length){
+        var self = this;
+
+        function play(){
+          var animator = self.animators.shift();
+          
+          if(animator instanceof Animator){
+            animator.start(function(){
+              if(self.animators.length){
+                play();
+              }
+            });
+          }else{
+            animator.apply(self);
+            if(self.animators.length){
+              play();
+            }
+          }
+        }
+        play();
+      }
+    }
+  };
+  
+  block.addEventListener('click', function(){
+   var T = 1414;
+  
+    var a1 = new Animator(T,  function(p){
+      var s = this.duration * 200 / T;
+      var ty = s * (p * p - 1);
+      block.style.transform = 'translateY(' 
+        + ty + 'px)';     
+    });
+
+    var a2 = new Animator(T,  function(p){
+      var s = this.duration * 200 / T;
+      var ty = - s * p * (2-p);
+      block.style.transform = 'translateY(' 
+        + ty + 'px)';     
+    });
+    
+  var animators = new AnimationQueue();
+  function foo(){
+      a2.duration *= 0.7;
+      if(a2.duration <= 0.0001){
+        animators.animators.length = 0;
+      }
+    }
+  animators.append(a1 ,foo, a2,
+    function b(){
+      a1.duration *= 0.7;
+      this.append(a1, foo, a2, b);
+    });
+    animators.flush();
+  });
+</script>
+</body>
+</html>
+

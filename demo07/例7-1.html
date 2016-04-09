@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<style type="text/css">
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(http://res.h5jun.com/matrix/8PQEganHkhynPxk-CUyDcJEk.png);}
+
+.bird0 {width:86px; height:60px; background-position: -178px -2px}
+.bird1 {width:86px; height:60px; background-position: -90px -2px}
+.bird2 {width:86px; height:60px; background-position: -2px -2px}
+
+ #bird{
+   position: absolute;
+   left: 100px;
+   top: 100px;
+   zoom: 0.5;
+ }
+</style>
+<body>
+<div id="bird" class="sprite bird1"></div>
+<script type="text/javascript">
+var i = 0;
+setInterval(function(){
+  bird.className = "sprite " + 'bird' + ((i++) % 3);
+}, 1000/10);
+</script>
+</body>
+</html>
+

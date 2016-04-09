@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<style>
+  #block{
+    position:absolute;
+    left: 200px;
+    top: 100px;
+    width: 20px;
+    height: 20px;
+    background: #0c8;
+    text-align: center;
+    border-radius: 50%;
+    animation: roll 4.0s linear 0s infinite;
+    transform-origin: 0 100px;
+  }
+  @keyframes roll{
+    0%{transform:rotate(0deg)}
+    50%{transform:rotate(360deg)}
+    100%{transform:rotate(0deg)}
+  }
+</style>
+<body>
+<div id="block"></div>
+</body>
+</html>
+

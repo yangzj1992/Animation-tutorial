@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<style>
+  #block{
+    position:absolute;
+    left: 50px;
+    top: 200px;
+    width: 20px;
+    height: 20px;
+    background: #0c8;
+    text-align: center;
+    border-radius: 50%;
+  }
+  #block.play {
+    transform: translateX(200px);
+    transition: transform 2.0s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+</style>
+<body>
+<div id="block"></div>
+<script>
+  block.addEventListener('click', function(){
+    block.className = 'play';
+  });
+</script>
+</body>
+</html>
+
